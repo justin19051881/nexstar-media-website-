@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Service } from '../utils/types';
 
@@ -11,8 +12,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   const LucideIcon = () => {
     const iconName = service.icon;
     
-    // You would normally import and use the actual Lucide icon
-    // For simplicity, we'll just render a placeholder
     return (
       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
         <span className="text-2xl">{iconName.charAt(0)}</span>
@@ -46,12 +45,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           </li>
         ))}
       </ul>
-      <a href="#" className="inline-flex items-center text-primary font-medium hover:underline mt-auto">
+      <Link 
+        to={`/services/${service.id}`} 
+        className="inline-flex items-center text-primary font-medium hover:underline mt-auto"
+      >
         Read More
         <ArrowRight size={16} className="ml-1" />
-      </a>
+      </Link>
     </div>
   );
 };
-
-export default ServiceCard;

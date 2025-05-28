@@ -34,6 +34,17 @@ export interface Service {
   description: string;
   icon: string;
   benefits: string[];
+  fullDescription?: string;
+  features?: string[];
+  process?: {
+    title: string;
+    description: string;
+  }[];
+  pricing?: {
+    title: string;
+    price: string;
+    features: string[];
+  }[];
 }
 
 // Client Types
@@ -43,6 +54,18 @@ export interface Client {
   logo: string;
   industry: string;
   description: string;
+}
+
+// Case Study Types
+export interface CaseStudy {
+  id: number;
+  title: string;
+  client: string;
+  industry: string;
+  challenge: string;
+  solution: string;
+  results: string[];
+  image: string;
 }
 
 // Announcement Types
