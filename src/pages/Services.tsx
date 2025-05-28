@@ -1,87 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Tv, Smartphone, PenTool, BarChart, Users, Radio, Globe, VideoIcon } from 'lucide-react';
-
+import { services } from '../data/services';
+import { caseStudies } from '../data/caseStudies';
 import ServiceCard from '../components/ServiceCard';
 import { Service } from '../utils/types';
 
 const Services: React.FC = () => {
-  // Comprehensive services data
-  const services: Service[] = [
-    {
-      id: 1,
-      title: 'Broadcast Solutions',
-      description: 'End-to-end broadcasting services with state-of-the-art technology and expert teams.',
-      icon: 'Tv',
-      benefits: [
-        'Wide national reach across multiple markets',
-        'HD broadcasting technology',
-        'Expert production teams',
-        'Custom programming options',
-      ],
-    },
-    {
-      id: 2,
-      title: 'Digital Advertising',
-      description: 'Targeted digital advertising solutions across multiple platforms and devices.',
-      icon: 'Smartphone',
-      benefits: [
-        'Hyper-local targeting capabilities',
-        'Cross-platform campaigns',
-        'Real-time analytics and reporting',
-        'Programmatic advertising options',
-      ],
-    },
-    {
-      id: 3,
-      title: 'Content Production',
-      description: 'Professional content creation for broadcast, digital, and social media platforms.',
-      icon: 'PenTool',
-      benefits: [
-        'Award-winning production teams',
-        'State-of-the-art equipment',
-        'Multi-format delivery options',
-        'Creative storytelling expertise',
-      ],
-    },
-    {
-      id: 4,
-      title: 'Media Analytics',
-      description: 'Comprehensive data analysis and insights to optimize your media strategy.',
-      icon: 'BarChart',
-      benefits: [
-        'Detailed audience insights',
-        'Campaign performance tracking',
-        'Competitive analysis',
-        'ROI measurement',
-      ],
-    },
-    {
-      id: 5,
-      title: 'Audience Development',
-      description: 'Strategies to grow and engage your audience across multiple channels.',
-      icon: 'Users',
-      benefits: [
-        'Community building tactics',
-        'Engagement optimization',
-        'Loyalty program development',
-        'Audience segmentation',
-      ],
-    },
-    {
-      id: 6,
-      title: 'Radio Broadcasting',
-      description: 'Radio programming and advertising solutions to reach audiences on the go.',
-      icon: 'Radio',
-      benefits: [
-        'Local and national radio networks',
-        'Custom radio content',
-        'Integrated radio campaigns',
-        'Podcast production and distribution',
-      ],
-    },
-  ];
-
   // Benefits of working with Nexstar
   const benefits = [
     {
@@ -197,7 +122,7 @@ const Services: React.FC = () => {
         </div>
       </section>
 
-      {/* Case Studies - Simplified for this example */}
+      {/* Case Studies Section */}
       <section className="section bg-gray-50">
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-12">
@@ -208,98 +133,41 @@ const Services: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <div className="h-48 bg-gray-200">
-                <img
-                  src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt="Retail Case Study"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">
-                  Retail
-                </span>
-                <h4 className="text-xl font-bold mb-2">National Retail Chain</h4>
-                <p className="text-gray-600 mb-4">
-                  Increased store traffic by 45% through integrated broadcast and digital campaign.
-                </p>
-                <a href="#" className="text-primary font-medium hover:underline inline-flex items-center">
-                  Read Case Study
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 ml-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+            {caseStudies.map((study) => (
+              <div key={study.id} className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div className="h-48 bg-gray-200">
+                  <img
+                    src={study.image}
+                    alt={study.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">
+                    {study.industry}
+                  </span>
+                  <h4 className="text-xl font-bold mb-2">{study.title}</h4>
+                  <p className="text-gray-600 mb-4">
+                    {study.challenge.slice(0, 100)}...
+                  </p>
+                  <Link 
+                    to={`/case-study/${study.id}`}
+                    className="text-primary font-medium hover:underline inline-flex items-center"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
+                    Read Case Study
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 ml-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
-            </div>
-
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <div className="h-48 bg-gray-200">
-                <img
-                  src="https://images.pexels.com/photos/3184419/pexels-photo-3184419.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt="Healthcare Case Study"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <span className="inline-block px-3 py-1 bg-secondary/10 text-secondary text-sm font-medium rounded-full mb-3">
-                  Healthcare
-                </span>
-                <h4 className="text-xl font-bold mb-2">Regional Healthcare Network</h4>
-                <p className="text-gray-600 mb-4">
-                  Generated 60% more patient inquiries through targeted local market campaigns.
-                </p>
-                <a href="#" className="text-primary font-medium hover:underline inline-flex items-center">
-                  Read Case Study
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 ml-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <div className="h-48 bg-gray-200">
-                <img
-                  src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt="Finance Case Study"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <span className="inline-block px-3 py-1 bg-accent/10 text-accent text-sm font-medium rounded-full mb-3">
-                  Finance
-                </span>
-                <h4 className="text-xl font-bold mb-2">National Bank</h4>
-                <p className="text-gray-600 mb-4">
-                  Achieved 120% ROI on digital advertising campaign targeting new account holders.
-                </p>
-                <a href="#" className="text-primary font-medium hover:underline inline-flex items-center">
-                  Read Case Study
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 ml-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
