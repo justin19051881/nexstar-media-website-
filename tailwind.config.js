@@ -1,0 +1,78 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,css}'],
+  safelist: ['duration-400'],
+  theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+    },
+    extend: {
+      fontSize: {
+        'base': '1.125rem',
+        'lg': '1.25rem',
+        'xl': '1.5rem',
+        '2xl': '1.875rem',
+        '3xl': '2.25rem',
+        '4xl': '3rem',
+        '5xl': '3.75rem',
+      },
+      fontFamily: {
+        heading: ['Poppins', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+      },
+      colors: {
+        primary: {
+          DEFAULT: '#001B5E',
+          50: '#E6F1FF',
+          100: '#CCE4FF',
+          200: '#99C9FF',
+          300: '#66AEFF',
+          400: '#3393FF',
+          500: '#001B5E',
+          600: '#0016A6',
+          700: '#001280',
+          800: '#000D59',
+          900: '#000833',
+        },
+        secondary: {
+          DEFAULT: '#FF0000',
+          50: '#FFE6E6',
+          100: '#FFCCCC',
+          200: '#FF9999',
+          300: '#FF6666',
+          400: '#FF3333',
+          500: '#FF0000',
+          600: '#CC0000',
+          700: '#990000',
+          800: '#660000',
+          900: '#330000',
+        },
+        accent: {
+          DEFAULT: '#FFB800',
+          50: '#FFF8E6',
+          100: '#FFF1CC',
+          200: '#FFE499',
+          300: '#FFD666',
+          400: '#FFC933',
+          500: '#FFB800',
+          600: '#CC9300',
+          700: '#996E00',
+          800: '#664A00',
+          900: '#332500',
+        },
+      },
+      animation: {
+        'fade-in': 'fade-in 0.7s ease-out',
+        'fade-in-up': 'fade-in-up 0.7s ease-out',
+        'fade-in-down': 'fade-in-down 0.7s ease-out',
+        'float': 'float 4s ease-in-out infinite',
+      },
+      transitionDuration: {
+        '400': '400ms',
+        '600': '600ms',
+      },
+    },
+  },
+  plugins: [],
+}
