@@ -160,16 +160,16 @@ const About: React.FC = () => {
             <div className="bg-white rounded-lg overflow-hidden shadow-md">
               <div className="h-64 bg-gray-200">
                 <img
-                  src="https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  src="https://spglobal.scene7.com/is/image/spglobalcom/perry-sook-headshot:square_1-1?$responsive$"
                   alt="CEO"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="p-6">
-                <h4 className="text-xl font-bold mb-1">Thomas Carter</h4>
+                <h4 className="text-xl font-bold mb-1">Perry A Sook</h4>
                 <p className="text-gray-500 mb-3">Chief Executive Officer</p>
                 <p className="text-gray-600">
-                  With over 25 years of media experience, Thomas leads Nexstar's strategic vision and growth initiatives.
+                  With over 25 years of media experience, Perry leads Nexstar's strategic vision and growth initiatives.
                 </p>
               </div>
             </div>
@@ -192,16 +192,16 @@ const About: React.FC = () => {
             <div className="bg-white rounded-lg overflow-hidden shadow-md">
               <div className="h-64 bg-gray-200">
                 <img
-                  src="https://images.pexels.com/photos/8430456/pexels-photo-8430456.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  src="https://cdn.mos.cms.futurecdn.net/xQu74DvrbMoAwSjzF8g3ZE.jpg"
                   alt="CTO"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="p-6">
-                <h4 className="text-xl font-bold mb-1">Marcus Johnson</h4>
+                <h4 className="text-xl font-bold mb-1">Brett Jenkins</h4>
                 <p className="text-gray-500 mb-3">Chief Technology Officer</p>
                 <p className="text-gray-600">
-                  Marcus drives Nexstar's technological innovation and digital transformation initiatives.
+                  Brett drives Nexstar's technological innovation and digital transformation initiatives.
                 </p>
               </div>
             </div>

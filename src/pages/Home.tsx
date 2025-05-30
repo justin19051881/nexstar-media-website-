@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Radio, Tv, Smartphone, PenTool, BarChart, Rss } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 import Hero from '../components/Hero';
 import NewsCard from '../components/NewsCard';
 import ServiceCard from '../components/ServiceCard';
 import ClientCard from '../components/ClientCard';
+import AnimatedCounter from '../components/AnimatedCounter';
+import PerformanceChart from '../components/PerformanceChart';
+import TestimonialSlider from '../components/TestimonialSlider';
 import { fetchNews } from '../utils/newsApi';
-import { NewsArticle, Service, Client } from '../utils/types';
+import { services } from '../data/services';
+import { NewsArticle, Client } from '../utils/types';
 
 const Home: React.FC = () => {
   const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
@@ -28,43 +33,6 @@ const Home: React.FC = () => {
 
     getNews();
   }, []);
-
-  // Sample services data
-  const services: Service[] = [
-    {
-      id: 1,
-      title: 'Broadcast Solutions',
-      description: 'End-to-end broadcasting services with state-of-the-art technology and expert teams.',
-      icon: 'Tv',
-      benefits: [
-        'Wide national reach across multiple markets',
-        'HD broadcasting technology',
-        'Expert production teams',
-      ],
-    },
-    {
-      id: 2,
-      title: 'Digital Advertising',
-      description: 'Targeted digital advertising solutions across multiple platforms and devices.',
-      icon: 'Smartphone',
-      benefits: [
-        'Hyper-local targeting capabilities',
-        'Cross-platform campaigns',
-        'Real-time analytics and reporting',
-      ],
-    },
-    {
-      id: 3,
-      title: 'Content Production',
-      description: 'Professional content creation for broadcast, digital, and social media platforms.',
-      icon: 'PenTool',
-      benefits: [
-        'Award-winning production teams',
-        'State-of-the-art equipment',
-        'Multi-format delivery options',
-      ],
-    },
-  ];
 
   // Sample clients data
   const clients: Client[] = [
@@ -113,22 +81,46 @@ const Home: React.FC = () => {
       <section className="py-12 bg-gray-50">
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="p-6">
-              <p className="text-3xl md:text-4xl font-bold text-primary mb-2">200+</p>
+            <motion.div 
+              className="p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <AnimatedCounter end={200} suffix="+" />
               <p className="text-gray-600">TV Stations</p>
-            </div>
-            <div className="p-6">
-              <p className="text-3xl md:text-4xl font-bold text-primary mb-2">100M+</p>
+            </motion.div>
+            <motion.div 
+              className="p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <AnimatedCounter end={100} suffix="M+" />
               <p className="text-gray-600">Viewers Reached</p>
-            </div>
-            <div className="p-6">
-              <p className="text-3xl md:text-4xl font-bold text-primary mb-2">$6B+</p>
+            </motion.div>
+            <motion.div 
+              className="p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <AnimatedCounter end={6} prefix="$" suffix="B+" />
               <p className="text-gray-600">Annual Revenue</p>
-            </div>
-            <div className="p-6">
-              <p className="text-3xl md:text-4xl font-bold text-primary mb-2">25+</p>
+            </motion.div>
+            <motion.div 
+              className="p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <AnimatedCounter end={25} suffix="+" />
               <p className="text-gray-600">Years Experience</p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -136,16 +128,29 @@ const Home: React.FC = () => {
       {/* Services Section */}
       <section className="section">
         <div className="container">
-          <div className="text-center max-w-3xl mx-auto mb-12">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             <h2 className="mb-4">Our Media Services</h2>
             <p className="text-gray-600 text-lg">
               Delivering comprehensive media solutions across broadcast, digital, and content production to help businesses reach their target audiences.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+            {services.slice(0, 3).map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <ServiceCard service={service} />
+              </motion.div>
             ))}
           </div>
 
@@ -157,11 +162,40 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Performance Chart Section */}
+      <section className="section bg-gray-50">
+        <div className="container">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="mb-4">Our Performance</h2>
+            <p className="text-gray-600 text-lg">
+              Track our growth and success across key metrics
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <PerformanceChart />
+          </motion.div>
+        </div>
+      </section>
+
       {/* About/CTA Section */}
       <section className="py-20 bg-primary text-white">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">America's Leading Local Media Company</h2>
               <p className="text-white/90 mb-6 text-lg">
                 Nexstar Media Group is America's largest local television and media company with 200 owned or partner stations in 116 markets reaching 212 million people.
@@ -172,8 +206,13 @@ const Home: React.FC = () => {
               <Link to="/about" className="btn bg-white text-primary hover:bg-gray-100">
                 Learn More About Us
               </Link>
-            </div>
-            <div className="relative">
+            </motion.div>
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
               <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
                 <img
                   src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -182,8 +221,33 @@ const Home: React.FC = () => {
                 />
               </div>
               <div className="absolute -top-4 -right-4 w-full h-full bg-secondary rounded-lg -z-10"></div>
-            </div>
+            </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="section">
+        <div className="container">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="mb-4">Client Testimonials</h2>
+            <p className="text-gray-600 text-lg">
+              Hear what our clients have to say about working with Nexstar Media Group
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <TestimonialSlider />
+          </motion.div>
         </div>
       </section>
 
@@ -191,19 +255,29 @@ const Home: React.FC = () => {
       <section className="section bg-gray-50">
         <div className="container">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
               <h2 className="mb-4">Latest Media News</h2>
               <p className="text-gray-600 text-lg max-w-2xl">
                 Stay updated with the latest news and developments in the media industry.
               </p>
-            </div>
-            <Link 
-              to="/news" 
-              className="inline-flex items-center text-primary font-medium hover:underline mt-4 md:mt-0"
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
             >
-              View All News
-              <ArrowRight size={16} className="ml-1" />
-            </Link>
+              <Link 
+                to="/news" 
+                className="inline-flex items-center text-primary font-medium hover:underline mt-4 md:mt-0"
+              >
+                View All News
+                <ArrowRight size={16} className="ml-1" />
+              </Link>
+            </motion.div>
           </div>
 
           {isLoading ? (
@@ -214,7 +288,15 @@ const Home: React.FC = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {latestNews.map((article, index) => (
-                <NewsCard key={index} article={article} />
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <NewsCard article={article} />
+                </motion.div>
               ))}
             </div>
           )}
@@ -224,16 +306,29 @@ const Home: React.FC = () => {
       {/* Clients Section */}
       <section className="section">
         <div className="container">
-          <div className="text-center max-w-3xl mx-auto mb-12">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             <h2 className="mb-4">Our Clients</h2>
             <p className="text-gray-600 text-lg">
               We're proud to work with leading businesses across various industries, helping them achieve their media and marketing goals.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {clients.map((client) => (
-              <ClientCard key={client.id} client={client} />
+            {clients.map((client, index) => (
+              <motion.div
+                key={client.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <ClientCard client={client} />
+              </motion.div>
             ))}
           </div>
         </div>
@@ -242,7 +337,12 @@ const Home: React.FC = () => {
       {/* Contact CTA */}
       <section className="section bg-gray-900 text-white">
         <div className="container">
-          <div className="text-center max-w-3xl mx-auto">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             <h2 className="mb-6">Ready to Transform Your Media Strategy?</h2>
             <p className="text-white/80 text-lg mb-8">
               Get in touch with our team of media experts to discuss how Nexstar Media Group can help your business reach new heights.
@@ -250,7 +350,7 @@ const Home: React.FC = () => {
             <Link to="/contact" className="btn bg-accent hover:bg-accent-dark text-white">
               Request a Free Quote
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
     </>

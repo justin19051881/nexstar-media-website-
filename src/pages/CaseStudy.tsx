@@ -53,13 +53,15 @@ const CaseStudy: React.FC = () => {
           </div>
 
           <div className="prose max-w-none">
-            <h2>The Challenge</h2>
+            <h5>The Challenge</h5>
             <p className="text-gray-600">{caseStudy.challenge}</p>
-
-            <h2>Our Solution</h2>
+          
+          
+            <h5>Our Solution</h5>
             <p className="text-gray-600">{caseStudy.solution}</p>
+            
 
-            <h2>Results</h2>
+            <h5>Results</h5>
             <ul>
               {caseStudy.results.map((result, index) => (
                 <li key={index} className="text-gray-600">{result}</li>
