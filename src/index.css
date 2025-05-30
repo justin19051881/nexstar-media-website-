@@ -4,90 +4,80 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --scroll-color: rgba(91, 42, 134, 0.3);
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   
   body {
     @apply font-body text-gray-800 bg-white;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scroll-color);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(91, 42, 134, 0.5);
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
-  
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
-  }
-  
-  h2 {
-    @apply text-3xl md:text-4xl font-bold leading-tight;
-  }
-  
-  h3 {
-    @apply text-2xl md:text-3xl font-semibold leading-tight;
-  }
-  
-  h4 {
-    @apply text-xl md:text-2xl font-semibold;
-  }
-  
-  h5 {
-    @apply text-lg md:text-xl font-medium;
-  }
-  
-  p {
-    @apply leading-relaxed;
-  }
 }
 
 @layer components {
-  .container {
-    @apply px-4 mx-auto max-w-7xl;
-  }
-  
-  .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 font-medium transition-all rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2;
-  }
-  
-  .btn-primary {
-    @apply bg-primary text-white hover:bg-primary-dark focus:ring-primary;
-  }
-  
-  .btn-secondary {
-    @apply bg-secondary text-white hover:bg-secondary-dark focus:ring-secondary;
-  }
-  
-  .btn-accent {
-    @apply bg-accent text-white hover:bg-accent-dark focus:ring-accent;
-  }
-  
-  .btn-outline {
-    @apply bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary;
-  }
-  
-  .card {
-    @apply p-6 bg-white rounded-lg shadow-md transition-shadow hover:shadow-lg;
-  }
-  
-  .section {
-    @apply py-16 md:py-24;
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg;
   }
 
-  .nav-link {
-    @apply px-3 py-2 text-base font-medium text-gray-700 transition-colors hover:text-primary;
+  .glass-button {
+    @apply bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-300 border border-white/20;
   }
-  
-  .nav-link-active {
-    @apply text-primary font-semibold;
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent animate-gradient-shift;
+    background-size: 200% 200%;
   }
-  
-  .news-card {
-    @apply overflow-hidden transition-all duration-300 bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1;
+
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
   }
-  
-  .service-card {
-    @apply p-6 transition-all duration-300 bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1;
+
+  .parallax-section {
+    @apply relative overflow-hidden;
+    transform-style: preserve-3d;
   }
+
+  .interactive-card {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+    transform-style: preserve-3d;
+  }
+
+  .nav-blur {
+    @apply backdrop-blur-md bg-white/70 supports-[backdrop-filter]:bg-white/70;
+  }
+}
+
+.locomotive-scroll {
+  overflow: hidden;
+}
+
+.smooth-scroll {
+  will-change: transform;
 }
