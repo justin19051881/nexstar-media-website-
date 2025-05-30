@@ -1,83 +1,194 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --scroll-color: rgba(91, 42, 134, 0.3);
+  --primary: 99 102 241;
+  --primary-foreground: 255 255 255;
+  --secondary: 16 185 129;
+  --secondary-foreground: 255 255 255;
+  --accent: 245 158 11;
+  --accent-foreground: 255 255 255;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
   }
   
   body {
-    @apply font-body text-gray-800 bg-white;
+    @apply font-body text-gray-800 bg-white antialiased;
     overflow-x: hidden;
   }
 
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+
   ::-webkit-scrollbar {
-    width: 8px;
+    @apply w-2;
   }
 
   ::-webkit-scrollbar-track {
-    background: transparent;
+    @apply bg-transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--scroll-color);
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(91, 42, 134, 0.5);
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply bg-primary/20 rounded-full transition-colors hover:bg-primary/30;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg;
+    @apply backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg;
   }
 
   .glass-button {
-    @apply bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-300 border border-white/20;
+    @apply backdrop-blur-md bg-white/20 hover:bg-white/30 transition-all duration-300 border border-white/20;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200 
+    disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-600 focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary-600 focus:ring-secondary-500;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary-500;
+  }
+
+  .nav-link {
+    @apply px-4 py-2 text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 
+    after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 
+    hover:after:w-full;
+  }
+
+  .nav-link-active {
+    @apply text-primary after:w-full;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden 
+    hover:translate-y-[-4px] hover:scale-[1.01];
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent animate-gradient-shift;
-    background-size: 200% 200%;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
   }
 
-  .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
+  .section {
+    @apply py-16 md:py-24;
   }
 
-  .parallax-section {
-    @apply relative overflow-hidden;
-    transform-style: preserve-3d;
-  }
-
-  .interactive-card {
-    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
-    transform-style: preserve-3d;
-  }
-
-  .nav-blur {
-    @apply backdrop-blur-md bg-white/70 supports-[backdrop-filter]:bg-white/70;
+  .container {
+    @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8;
   }
 }
 
-.locomotive-scroll {
-  overflow: hidden;
+/* Locomotive Scroll */
+.has-scroll-smooth {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-.smooth-scroll {
-  will-change: transform;
+.has-scroll-smooth [data-scroll-container] {
+  min-height: 100vh;
+}
+
+/* Animations */
+.animate-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-in-down {
+  animation: fadeInDown 0.5s ease-out forwards;
+}
+
+/* Glassmorphism */
+.glass {
+  @apply backdrop-blur-lg bg-white/10 border border-white/20;
+}
+
+.glass-dark {
+  @apply backdrop-blur-lg bg-gray-900/10 border border-gray-800/20;
+}
+
+/* 3D Transform */
+.preserve-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Hover Effects */
+.hover-lift {
+  @apply transition-transform duration-300 hover:-translate-y-1;
+}
+
+.hover-scale {
+  @apply transition-transform duration-300 hover:scale-105;
+}
+
+/* Loading States */
+.loading {
+  @apply animate-pulse bg-gray-200;
+}
+
+.shimmer {
+  @apply relative overflow-hidden;
+}
+
+.shimmer::after {
+  @apply absolute inset-0;
+  content: '';
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmer 1.5s infinite;
+}
+
+/* Parallax */
+.parallax {
+  @apply relative overflow-hidden;
+  transform-style: preserve-3d;
+}
+
+.parallax > * {
+  @apply relative;
+  transform: translateZ(0);
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
 }
