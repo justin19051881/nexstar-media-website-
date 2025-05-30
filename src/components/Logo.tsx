@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const Logo: React.FC = () => {
   return (
     <motion.div 
-      className="flex items-center"
+      className="flex items-center bg-white px-3 py-1.5 rounded-lg"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5 }}
@@ -25,7 +25,7 @@ const Logo: React.FC = () => {
           STAR
         </motion.span>
         <motion.div 
-          className="text-sm ml-1 text-gray-600"
+          className="text-sm ml-1 text-gray-600 font-medium"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
