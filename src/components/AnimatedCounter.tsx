@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { useEffect } from 'react';
 
 interface AnimatedCounterProps {
   end: number;
@@ -9,56 +8,41 @@ interface AnimatedCounterProps {
   prefix?: string;
 }
 
-const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ 
-  end, 
-  duration = 2, 
-  suffix = '', 
-  prefix = '' 
-}) => {
-  const [count, setCount] = useState(0);
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.5,
-  });
+export default function AnimatedCounter({
+  end,
+  duration = 2,
+  suffix = '',
+  prefix = '',
+}: AnimatedCounterProps) {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
 
   useEffect(() => {
-    if (inView) {
-      let startTime: number | null = null;
-      let animationFrame: number;
+    const controls = animate(count, end, {
+      duration,
+      ease: 'easeOut',
+    });
 
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-
-        if (progress < 1) {
-          setCount(Math.floor(end * progress));
-          animationFrame = requestAnimationFrame(animate);
-        } else {
-          setCount(end);
-        }
-      };
-
-      animationFrame = requestAnimationFrame(animate);
-
-      return () => {
-        if (animationFrame) {
-          cancelAnimationFrame(animationFrame);
-        }
-      };
-    }
-  }, [inView, end, duration]);
+    return controls.stop;
+  }, [count, end, duration]);
 
   return (
     <motion.div
-      ref={ref}
+      className="relative"
       initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.5 }}
-      className="text-3xl md:text-4xl font-bold text-primary"
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
     >
-      {prefix}{count.toLocaleString()}{suffix}
+      <motion.div
+        className="text-4xl md:text-5xl font-bold text-primary"
+        initial={{ scale: 1 }}
+        whileHover={{ scale: 1.1 }}
+      >
+        {prefix}
+        <motion.span>{rounded}</motion.span>
+        {suffix}
+      </motion.div>
+      <div className="absolute -inset-4 bg-primary/5 rounded-xl -z-10 blur-xl" />
     </motion.div>
   );
-};
-
-export default AnimatedCounter;
+}
